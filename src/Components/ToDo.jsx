@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import "../app.css";
+import "../App.css";
 import DialogComponent from "./DialogComponent";
 import { useState } from "react";
 import ActionButtons from "./ActionButtons";
