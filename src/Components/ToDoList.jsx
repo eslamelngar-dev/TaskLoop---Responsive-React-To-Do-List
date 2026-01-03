@@ -10,7 +10,7 @@ import ToDo from "./ToDo";
 import AddButton from "./AddButton";
 import { v4 as uuidv4 } from "uuid";
 import TextField from "@mui/material/TextField";
-import EmptyList from "./emptyList";
+import EmptyList from "./EmptyList";
 import { todosContext } from "../Contexts/todosContext";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
