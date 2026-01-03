@@ -1,28 +1,144 @@
-.card {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.4s 0.09s ease !important;
-}
-.card:hover {
-  padding: 10px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+/* --- 1. إعدادات الخطوط والخلفية العامة --- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cairo:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #6366f1; /* Deep Indigo */
+  --primary-hover: #4f46e5;
+  --bg-color: #f8fafc; /* Soft Gray Blue */
+  --text-main: #1e293b; /* Dark Slate */
+  --text-secondary: #64748b;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
-.IconButtons {
-  transition: all 0.4s ease !important;
+* {
+  box-sizing: border-box;
 }
-.check-IconButtons:hover {
-  background-color: #1eb91e !important;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  font-family: "Inter", "Cairo", sans-serif;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
 }
-.edit-IconButtons:hover {
-  background-color: rgb(18, 160, 226) !important;
+
+/* لجعل الفوتر دائماً في أسفل الصفحة */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-.delete-IconButtons:hover {
-  background-color: #cf322f !important;
+
+/* --- 2. تنسيق الهوم بيج (Hero Section) --- */
+.home-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  background: radial-gradient(
+      circle at 10% 20%,
+      rgba(99, 102, 241, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(99, 102, 241, 0.05) 0%,
+      transparent 50%
+    );
 }
-.done-text {
-  color: gray;
-  text-decoration: line-through !important;
+
+.home-title {
+  background: linear-gradient(to right, #1e293b, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
 }
-.done:hover {
-  background-color: rgb(108, 108, 108) !important;
+
+/* --- 3. تنسيق قائمة المهام (ToDo List) --- */
+.todo-layout {
+  padding-bottom: 40px;
+}
+
+/* زر الفلترة (Toggle Buttons) */
+.todo-filters {
+  background-color: #f1f5f9 !important;
+  border: none !important;
+  padding: 4px !important;
+  border-radius: 12px !important;
+}
+
+.todo-filters .MuiToggleButton-root {
+  border: none !important;
+  color: var(--text-secondary) !important;
+  text-transform: capitalize !important;
+  font-weight: 600 !important;
+  padding: 6px 20px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.todo-filters .Mui-selected {
+  background-color: white !important;
+  color: var(--primary-color) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* --- 4. تنسيق المهمة الواحدة (ToDo Item) --- */
+.card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* زر الإضافة */
+.add-btn {
+  background: var(--primary-color) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.39) !important;
+  transition: all 0.2s ease !important;
+}
+
+.add-btn:hover {
+  background: var(--primary-hover) !important;
+  transform: scale(1.05);
+}
+
+/* --- 5. تحسينات إضافية للمكونات --- */
+.nav-link {
+  transition: color 0.2s ease;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+@media (max-width: 600px) {
+  .home-title {
+    font-size: 2.5rem !important;
+  }
+
+  .todo-filters .MuiToggleButton-root {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+  }
 }

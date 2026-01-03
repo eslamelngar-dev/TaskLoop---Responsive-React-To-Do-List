@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToDo from "./ToDo";
@@ -12,63 +12,46 @@ import { v4 as uuidv4 } from "uuid";
 import TextField from "@mui/material/TextField";
 import EmptyList from "./emptyList";
 import { todosContext } from "../Contexts/todosContext";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import "../app.css";
 
-
 export default function ToDoList() {
-  const {todos,setToDos} = useContext(todosContext)
-
+  const { todos, setToDos } = useContext(todosContext);
   const [displayedTodos, setdisplayedTodos] = useState("All");
   const [newTaskInput, setnewTaskInput] = useState("");
 
-  const changeDisplayedTodos = (e) => {
-    setdisplayedTodos(e.target.value);
+  const changeDisplayedTodos = (e, nextView) => {
+    if (nextView !== null) {
+      setdisplayedTodos(nextView);
+    }
   };
 
-  useEffect(()=>{
-    const storageTodos = JSON.parse(localStorage.getItem("todos")) || []
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem("todos")) || [];
     setToDos(storageTodos);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, [setToDos]);
 
-  const completedTodos = todos.filter((t) => {
-    return t.isDone
-  })
-  const notCompletedTodos = todos.filter((t) => {
-    return !t.isDone
-  })
+  const completedTodos = todos.filter((t) => t.isDone);
+  const notCompletedTodos = todos.filter((t) => !t.isDone);
 
-  let todosToBeRender = todos
-  
-  if(displayedTodos == "done"){
-    todosToBeRender = completedTodos
-  }else if (displayedTodos == "undone"){
-    todosToBeRender = notCompletedTodos
-  }else{
-    todosToBeRender = todos
+  let todosToBeRender = todos;
+  if (displayedTodos === "done") {
+    todosToBeRender = completedTodos;
+  } else if (displayedTodos === "undone") {
+    todosToBeRender = notCompletedTodos;
   }
 
-
-  function handelDoneCheck(todoID){
-    const updatedTodos = todos.map((t)=> {
-      if(t.id == todoID){
-        t.isDone = !t.isDone
+  function handelDoneCheck(todoID) {
+    const updatedTodos = todos.map((t) => {
+      if (t.id === todoID) {
+        return { ...t, isDone: !t.isDone };
       }
-      return t
-    })
-    setToDos(updatedTodos)
-    localStorage.setItem("todos",JSON.stringify(updatedTodos))
+      return t;
+    });
+    setToDos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
-
-  const todo = todosToBeRender.slice().reverse().map((t) => (
-    <ToDo
-      key = {t.id}
-      todo = {t}
-      setTodos = {setToDos}
-      checkFunction = {handelDoneCheck}
-      deleteFunction={handleDeleteTask}
-    />
-  ));
 
   function addTask() {
     if (!newTaskInput.trim()) return;
@@ -79,81 +62,104 @@ export default function ToDoList() {
         title: newTaskInput,
         isDone: false,
       },
-    ]
-
+    ];
     setToDos(updatedTodos);
-
-    localStorage.setItem("todos",JSON.stringify(updatedTodos))
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setnewTaskInput("");
   }
 
   function handleDeleteTask(selectedTask) {
-    const updatedTodos = todos.filter((task) => {
-        return selectedTask !== task.id
-      })
-    setToDos(updatedTodos)
-    localStorage.setItem("todos",JSON.stringify(updatedTodos))
+    const updatedTodos = todos.filter((task) => selectedTask !== task.id);
+    setToDos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   return (
-    <>
-      <Container className="todo-layout" maxWidth="md" sx={{ mt: 2, }}>
-        <Card>
-          <CardContent>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
+    <Container maxWidth="sm" sx={{ mt: 8, mb: 8 }}>
+      <Card
+        sx={{
+          borderRadius: "24px",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
+          overflow: "visible",
+          border: "1px solid rgba(0,0,0,0.05)",
+        }}
+      >
+        <CardContent sx={{ p: 4 }}>
+          {/* Header Section */}
+          <Stack spacing={2} sx={{ mb: 4 }}>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 800,
+                color: "#1e293b",
+                textAlign: "left",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
-              <Typography
-                fontFamily={"BBH Hegarty"}
-                fontWeight={"100"}
-                color="primary"
-                className="todo-title"
-                variant="h3"
-                sx={{
-                  p: 1,
-                  mb: 1,
-                  pl: 2,
-                  fontSize: { xs: "2rem", md: "2.5rem" },
-                }}
-                textAlign={"center"}
-              >
-                My Tasks
-              </Typography>
-              <div>
-                <TextField
-                  id="outlined-basic"
-                  label="New Task"
-                  variant="outlined"
-                  value={newTaskInput}
-                  onChange={(e) => setnewTaskInput(e.target.value)}
-                />
-                <AddButton addFunction={addTask} />
-              </div>
-            </div>
+              My Tasks
+            </Typography>
 
-            <Divider />
+            {/* Input Section */}
+            <Box
+              sx={{
+                display: "flex",
+                gap: 1,
+                background: "#f8fafc",
+                p: 1,
+                borderRadius: "16px",
+                border: "1px solid #e2e8f0",
+              }}
+            >
+              <TextField
+                fullWidth
+                placeholder="What needs to be done?"
+                variant="standard"
+                value={newTaskInput}
+                onChange={(e) => setnewTaskInput(e.target.value)}
+        
+              />
+              <AddButton addFunction={addTask} />
+            </Box>
+          </Stack>
+
+          <Divider sx={{ mb: 3 }} />
+
+          {/* Filters Section */}
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
             <ToggleButtonGroup
-            className="todo-filters"
-              color="primary"
+              className="todo-filters"
               value={displayedTodos}
               exclusive
               onChange={changeDisplayedTodos}
-              aria-label="classification"
-              sx={{ p: 2, mb: 1}}
-              style={{ display: "flex", justifyContent: "center" }}
+              size="small"
             >
-              <ToggleButton value="undone">Undone</ToggleButton>
-              <ToggleButton value="done">done</ToggleButton>
               <ToggleButton value="All">All</ToggleButton>
+              <ToggleButton value="undone">Pending</ToggleButton>
+              <ToggleButton value="done">Completed</ToggleButton>
             </ToggleButtonGroup>
-            {todos.length > 0 ? todo : <EmptyList />}
-          </CardContent>
-        </Card>
-      </Container>
-    </>
+          </Box>
+
+          {/* Tasks List */}
+          <Box sx={{ minHeight: "300px" }}>
+            {todos.length > 0 ? (
+              todosToBeRender
+                .slice()
+                .reverse()
+                .map((t) => (
+                  <ToDo
+                    key={t.id}
+                    todo={t}
+                    setTodos={setToDos}
+                    checkFunction={handelDoneCheck}
+                    deleteFunction={handleDeleteTask}
+                  />
+                ))
+            ) : (
+              <EmptyList />
+            )}
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
