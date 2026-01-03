@@ -14,7 +14,7 @@ import EmptyList from "./EmptyList";
 import { todosContext } from "../Contexts/todosContext";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import "../app.css";
+import "../App.css";
 
 export default function ToDoList() {
   const { todos, setToDos } = useContext(todosContext);
