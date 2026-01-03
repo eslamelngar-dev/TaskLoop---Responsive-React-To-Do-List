@@ -1,0 +1,28 @@
+.card {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.4s 0.09s ease !important;
+}
+.card:hover {
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.IconButtons {
+  transition: all 0.4s ease !important;
+}
+.check-IconButtons:hover {
+  background-color: #1eb91e !important;
+}
+.edit-IconButtons:hover {
+  background-color: rgb(18, 160, 226) !important;
+}
+.delete-IconButtons:hover {
+  background-color: #cf322f !important;
+}
+.done-text {
+  color: gray;
+  text-decoration: line-through !important;
+}
+.done:hover {
+  background-color: rgb(108, 108, 108) !important;
+}
