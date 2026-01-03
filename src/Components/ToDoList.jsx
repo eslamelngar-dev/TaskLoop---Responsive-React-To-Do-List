@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext,useMemo } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToDo from "./ToDo";
@@ -32,8 +32,13 @@ export default function ToDoList() {
     setToDos(storageTodos);
   }, [setToDos]);
 
-  const completedTodos = todos.filter((t) => t.isDone);
-  const notCompletedTodos = todos.filter((t) => !t.isDone);
+  const completedTodos = useMemo(() => {
+    return todos.filter((t) => t.isDone);
+  },[todos])
+
+  const notCompletedTodos = useMemo(() => {
+    return todos.filter((t) => !t.isDone);
+  },[todos])
 
   let todosToBeRender = todos;
   if (displayedTodos === "done") {
