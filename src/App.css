@@ -1,11 +1,10 @@
-/* --- 1. إعدادات الخطوط والخلفية العامة --- */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cairo:wght@400;700&display=swap");
 
 :root {
-  --primary-color: #6366f1; /* Deep Indigo */
+  --primary-color: #6366f1;
   --primary-hover: #4f46e5;
-  --bg-color: #f8fafc; /* Soft Gray Blue */
-  --text-main: #1e293b; /* Dark Slate */
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
   --text-secondary: #64748b;
   --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
     0 8px 10px -6px rgba(0, 0, 0, 0.05);
@@ -24,14 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* لجعل الفوتر دائماً في أسفل الصفحة */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* --- 2. تنسيق الهوم بيج (Hero Section) --- */
 .home-container {
   flex: 1;
   display: flex;
@@ -57,12 +54,10 @@ body {
   margin-bottom: 24px;
 }
 
-/* --- 3. تنسيق قائمة المهام (ToDo List) --- */
 .todo-layout {
   padding-bottom: 40px;
 }
 
-/* زر الفلترة (Toggle Buttons) */
 .todo-filters {
   background-color: #f1f5f9 !important;
   border: none !important;
@@ -86,7 +81,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* --- 4. تنسيق المهمة الواحدة (ToDo Item) --- */
 .card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -96,7 +90,6 @@ body {
   box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* زر الإضافة */
 .add-btn {
   background: var(--primary-color) !important;
   color: white !important;
@@ -110,7 +103,6 @@ body {
   transform: scale(1.05);
 }
 
-/* --- 5. تحسينات إضافية للمكونات --- */
 .nav-link {
   transition: color 0.2s ease;
 }
