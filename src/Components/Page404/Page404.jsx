@@ -1,5 +1,5 @@
-import './Page404.css'
-import {Link} from 'react-router-dom'
+import "./Page404.css";
+import { Link } from "react-router-dom";
 
 export default function Page404() {
   return (
@@ -18,12 +18,9 @@ export default function Page404() {
 
                   <p>the page you are looking for not avaible!</p>
 
-                <Link to="/">
-                <span className="link_404">
-                    Go to Home
-                  </span>
-                </Link>
-                  
+                  <Link to="/">
+                    <span className="link_404">Go to Home</span>
+                  </Link>
                 </div>
               </div>
             </div>
