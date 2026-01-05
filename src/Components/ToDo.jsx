@@ -11,16 +11,19 @@ import DialogComponent from "./DialogComponent";
 import { useState } from "react";
 import ActionButtons from "./ActionButtons";
 import TextField from "@mui/material/TextField";
+import { useContext } from "react";
+import { SnackBarContext } from "../Contexts/SnackBarContext";
 
-export default function ToDo({
-  todo,
-  setTodos,
-  checkFunction,
-  deleteFunction,
-}) {
-  const [open, setOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editTitle, setEditTitle] = useState(todo.title);
+  export default function ToDo({
+    todo,
+    setTodos,
+    checkFunction,
+    deleteFunction,
+  }) {
+    const [open, setOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editTitle, setEditTitle] = useState(todo.title);
+    const { showSnackBar } = useContext(SnackBarContext);
 
   function handelDoneClick() {
     checkFunction(todo.id);
@@ -37,6 +40,7 @@ export default function ToDo({
       )
     );
     setIsEditing(false);
+    showSnackBar("Task Edited Successfully");
   }
 
   function handelDeleteClick() {

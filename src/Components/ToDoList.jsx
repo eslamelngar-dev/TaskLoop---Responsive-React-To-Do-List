@@ -14,12 +14,14 @@ import EmptyList from "./EmptyList";
 import { todosContext } from "../Contexts/todosContext";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { SnackBarContext } from "../Contexts/SnackBarContext";
 import "../App.css";
 
 export default function ToDoList() {
   const { todos, setToDos } = useContext(todosContext);
   const [displayedTodos, setdisplayedTodos] = useState("All");
   const [newTaskInput, setnewTaskInput] = useState("");
+  const {showSnackBar} = useContext(SnackBarContext)
 
   const changeDisplayedTodos = (e, nextView) => {
     if (nextView !== null) {
@@ -71,12 +73,14 @@ export default function ToDoList() {
     setToDos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setnewTaskInput("");
+    showSnackBar("New task Has Been Added")
   }
 
   function handleDeleteTask(selectedTask) {
     const updatedTodos = todos.filter((task) => selectedTask !== task.id);
     setToDos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    showSnackBar("Task Has Been Deleted")
   }
 
   return (
