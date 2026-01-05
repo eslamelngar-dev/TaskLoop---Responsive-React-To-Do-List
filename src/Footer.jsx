@@ -1,4 +1,5 @@
-import { Box, Container, Typography, Link, Stack } from "@mui/material";
+import { Box, Container, Typography, Stack } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -24,27 +25,25 @@ export default function Footer() {
 
           <Stack direction="row" spacing={3}>
             <Link
-              href="#"
-              underline="none"
+              to="*"
               color="text.secondary"
-              sx={{ "&:hover": { color: "#6366f1" } }}
+              style={{textDecoration: "none",color: "#6366f1"}}
             >
               Privacy Policy
             </Link>
             <Link
-              href="#"
-              underline="none"
+              to="*"
+              textDecoration="none"
               color="text.secondary"
-              sx={{ "&:hover": { color: "#6366f1" } }}
+              style={{textDecoration: "none",color: "#6366f1"}}
             >
               Terms of Service
             </Link>
             <Link
-              href="https://github.com/eslamelngar-dev"
+              to="https://github.com/eslamelngar-dev"
               target="_blank"
-              underline="none"
               color="text.secondary"
-              sx={{ "&:hover": { color: "#6366f1" } }}
+              style={{textDecoration: "none",color: "#6366f1"}}
             >
               GitHub
             </Link>
