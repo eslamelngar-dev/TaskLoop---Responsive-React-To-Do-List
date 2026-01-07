@@ -26,7 +26,7 @@ export default function ActionButtons({
           backgroundColor: todo.isDone ? "grey" : "#21c921",
           color: "white",
         }}
-        className={`IconButtons check-IconButtons ${todo.isDone ? "done" : ""}`}
+        className={`IconButtons add-btn ${todo.isDone ? "done" : ""}`}
         onClick={handelDoneClick}
       >
         <CheckIcon />
@@ -38,7 +38,7 @@ export default function ActionButtons({
           backgroundColor: "rgb(20, 173, 244)",
           color: "white",
         }}
-        className="IconButtons edit-IconButtons"
+        className="IconButtons edit-btn"
         onClick={isEditing ? handelSaveClick : handleEditClick}
       >
         {isEditing ? <SaveIcon /> : <EditIcon />}
@@ -46,7 +46,7 @@ export default function ActionButtons({
 
       <IconButton
         sx={{ backgroundColor: "#e53935", color: "white" }}
-        className="IconButtons delete-IconButtons"
+        className="IconButtons delete-btn"
         onClick={handelDeleteClick}
       >
         <DeleteIcon />

@@ -90,17 +90,43 @@ body {
   box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
+.IconButtons {
+  border-radius: 50% !important;
+}
+.IconButtons:hover {
+  border-radius: 50% !important;
+  transform: scale(1.03);
+}
+
 .add-btn {
-  background: var(--primary-color) !important;
+  background: #21c921 !important;
   color: white !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.39) !important;
+  box-shadow: 0 4px 14px rgba(104, 241, 99, 0.39) !important;
   transition: all 0.2s ease !important;
 }
 
 .add-btn:hover {
-  background: var(--primary-hover) !important;
-  transform: scale(1.05);
+  background: #20c320 !important;
+}
+.edit-btn {
+  background: rgb(20, 173, 244) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(104, 241, 99, 0.39) !important;
+  transition: all 0.2s ease !important;
+}
+
+.edit-btn:hover {
+  background: rgb(18, 159, 225) !important;
+}
+.delete-btn {
+  background: #e53935 !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(104, 241, 99, 0.39) !important;
+  transition: all 0.2s ease !important;
+}
+
+.delete-btn:hover {
+  background: #d93533 !important;
 }
 
 .nav-link {
