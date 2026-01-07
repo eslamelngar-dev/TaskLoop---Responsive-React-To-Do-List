@@ -98,6 +98,16 @@ body {
   transform: scale(1.03);
 }
 
+.start-btn {
+  border-radius: 10px !important;
+  background: var(--primary-color) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(109, 99, 241, 0.39) !important;
+  transition: all 0.4s ease !important;
+}
+.start-btn:hover {
+  background: var(--primary-hover) !important;
+}
 .add-btn {
   background: #21c921 !important;
   color: white !important;

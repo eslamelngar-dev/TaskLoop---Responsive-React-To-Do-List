@@ -13,7 +13,7 @@ export default function HomePage() {
           clean, intuitive interface.
         </Typography>
         <Link to="/todolist" style={{ textDecoration: 'none' }}>
-          <Button variant="contained" size="large" className="add-btn">
+          <Button variant="contained" size="large" className="start-btn">
             Get Started Free
           </Button>
         </Link>
