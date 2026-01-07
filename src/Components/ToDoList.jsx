@@ -3,25 +3,24 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useEffect, useState, useContext,useMemo } from "react";
+import { useEffect, useState, useContext, useMemo, useReducer } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToDo from "./ToDo";
 import AddButton from "./AddButton";
-import { v4 as uuidv4 } from "uuid";
 import TextField from "@mui/material/TextField";
 import EmptyList from "./EmptyList";
-import { todosContext } from "../Contexts/todosContext";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { SnackBarContext } from "../Contexts/SnackBarContext";
+import TodosReducer from "../Reducers/TodosReducers";
 import "../App.css";
 
 export default function ToDoList() {
-  const { todos, setToDos } = useContext(todosContext);
+  const [todos, dispatch] = useReducer(TodosReducer, []);
   const [displayedTodos, setdisplayedTodos] = useState("All");
   const [newTaskInput, setnewTaskInput] = useState("");
-  const {showSnackBar} = useContext(SnackBarContext)
+  const { showSnackBar } = useContext(SnackBarContext);
 
   const changeDisplayedTodos = (e, nextView) => {
     if (nextView !== null) {
@@ -31,16 +30,16 @@ export default function ToDoList() {
 
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    setToDos(storageTodos);
-  }, [setToDos]);
+    dispatch({ type: "loaded", payload: storageTodos });
+  }, [dispatch]);
 
   const completedTodos = useMemo(() => {
     return todos.filter((t) => t.isDone);
-  },[todos])
+  }, [todos]);
 
   const notCompletedTodos = useMemo(() => {
     return todos.filter((t) => !t.isDone);
-  },[todos])
+  }, [todos]);
 
   let todosToBeRender = todos;
   if (displayedTodos === "done") {
@@ -49,38 +48,19 @@ export default function ToDoList() {
     todosToBeRender = notCompletedTodos;
   }
 
-  function handelDoneCheck(todoID) {
-    const updatedTodos = todos.map((t) => {
-      if (t.id === todoID) {
-        return { ...t, isDone: !t.isDone };
-      }
-      return t;
-    });
-    setToDos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  function addTask() {
+    dispatch({ type: "added", payload: { title: newTaskInput } });
+    setnewTaskInput("");
+    showSnackBar("New task Has Been Added");
   }
 
-  function addTask() {
-    if (!newTaskInput.trim()) return;
-    const updatedTodos = [
-      ...todos,
-      {
-        id: uuidv4(),
-        title: newTaskInput,
-        isDone: false,
-      },
-    ];
-    setToDos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    setnewTaskInput("");
-    showSnackBar("New task Has Been Added")
+  function handelDoneCheck(todoID) {
+    dispatch({ type: "checked", payload: todoID });
   }
 
   function handleDeleteTask(selectedTask) {
-    const updatedTodos = todos.filter((task) => selectedTask !== task.id);
-    setToDos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    showSnackBar("Task Has Been Deleted")
+    dispatch({ type: "deleted", payload: selectedTask });
+    showSnackBar("Task Has Been Deleted");
   }
 
   return (
@@ -125,7 +105,6 @@ export default function ToDoList() {
                 variant="standard"
                 value={newTaskInput}
                 onChange={(e) => setnewTaskInput(e.target.value)}
-        
               />
               <AddButton addFunction={addTask} />
             </Box>
@@ -156,9 +135,9 @@ export default function ToDoList() {
                 .reverse()
                 .map((t) => (
                   <ToDo
+                    dispatch={dispatch}
                     key={t.id}
                     todo={t}
-                    setTodos={setToDos}
                     checkFunction={handelDoneCheck}
                     deleteFunction={handleDeleteTask}
                   />

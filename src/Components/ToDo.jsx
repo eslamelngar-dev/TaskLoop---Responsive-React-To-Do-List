@@ -16,7 +16,7 @@ import { SnackBarContext } from "../Contexts/SnackBarContext";
 
   export default function ToDo({
     todo,
-    setTodos,
+    dispatch,
     checkFunction,
     deleteFunction,
   }) {
@@ -34,11 +34,12 @@ import { SnackBarContext } from "../Contexts/SnackBarContext";
   }
 
   function handleSaveEdit() {
-    setTodos((prevTodos) =>
-      prevTodos.map((prevT) =>
-        prevT.id == todo.id ? { ...prevT, title: editTitle } : prevT
-      )
-    );
+    dispatch({
+      type: "edited",
+      payload: {
+        id:todo.id,
+        editTitle: editTitle
+  }})
     setIsEditing(false);
     showSnackBar("Task Edited Successfully");
   }

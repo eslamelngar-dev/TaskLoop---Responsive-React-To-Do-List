@@ -111,7 +111,7 @@ body {
 .edit-btn {
   background: rgb(20, 173, 244) !important;
   color: white !important;
-  box-shadow: 0 4px 14px rgba(104, 241, 99, 0.39) !important;
+  box-shadow: 0 4px 14px rgba(99, 210, 241, 0.39) !important;
   transition: all 0.2s ease !important;
 }
 
@@ -121,7 +121,7 @@ body {
 .delete-btn {
   background: #e53935 !important;
   color: white !important;
-  box-shadow: 0 4px 14px rgba(104, 241, 99, 0.39) !important;
+  box-shadow: 0 4px 14px rgba(241, 99, 99, 0.39) !important;
   transition: all 0.2s ease !important;
 }
 
