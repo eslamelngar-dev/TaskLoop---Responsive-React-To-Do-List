@@ -7,7 +7,6 @@ import {
   Container,
   Button,
   Stack,
-  Box,
 } from "@mui/material";
 
 export default function NavBar() {
@@ -15,18 +14,17 @@ export default function NavBar() {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(12px)",
         boxShadow: "none",
-        borderBottom: "1px solid rgba(0,0,0,0.05)",
+        borderBottom: "1px solid rgba(0,0,0,0.06)",
         top: 0,
       }}
     >
-      <Container maxWidth="lg">
-        <Toolbar
-          sx={{ display: "flex", justifyContent: "space-between", py: 1 }}
-        >
-          {/* Logo Section */}
+      {/* Full Width Container */}
+      <Container maxWidth={false} disableGutters sx={{display:"flex",justifyContent:"space-around"}}>
+
+          {/* Logo */}
           <Link
             to="/"
             style={{
@@ -44,64 +42,44 @@ export default function NavBar() {
                 color: "#1e293b",
                 letterSpacing: "-1px",
                 fontFamily: "'Inter', sans-serif",
+                fontSize:{
+                  xs:"1rem",
+                  sm:"2rem",
+                  md:"3rem"
+                }
               }}
             >
               TaskLoop
             </Typography>
           </Link>
 
-          {/* Navigation Links */}
+          {/* Nav Links */}
           <Stack direction="row" spacing={1}>
-            <Button
-              component={NavLink}
-              to="/"
-              sx={{
-                color: "#64748b",
-                fontWeight: 600,
-                "&.active": {
-                  color: "#6366f1",
-                  backgroundColor: "rgba(99, 102, 241, 0.08)",
-                },
-                borderRadius: "10px",
-                px: 2,
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              component={NavLink}
-              to="/todolist"
-              sx={{
-                color: "#64748b",
-                fontWeight: 600,
-                "&.active": {
-                  color: "#6366f1",
-                  backgroundColor: "rgba(99, 102, 241, 0.08)",
-                },
-                borderRadius: "10px",
-                px: 2,
-              }}
-            >
-              Tasks
-            </Button>
-            <Button
-              component={NavLink}
-              to="/about"
-              sx={{
-                color: "#64748b",
-                fontWeight: 600,
-                "&.active": {
-                  color: "#6366f1",
-                  backgroundColor: "rgba(99, 102, 241, 0.08)",
-                },
-                borderRadius: "10px",
-                px: 2,
-              }}
-            >
-              About
-            </Button>
+            {[
+              { name: "Home", path: "/" },
+              { name: "Tasks", path: "/todolist" },
+              { name: "About", path: "/about" },
+            ].map((link) => (
+              <Button
+                key={link.name}
+                component={NavLink}
+                to={link.path}
+                sx={{
+                  color: "#64748b",
+                  fontWeight: 600,
+                  borderRadius: "10px",
+                  px: 2,
+                  textTransform: "none",
+                  "&.active": {
+                    color: "#6366f1",
+                    backgroundColor: "rgba(99, 102, 241, 0.1)",
+                  },
+                }}
+              >
+                {link.name}
+              </Button>
+            ))}
           </Stack>
-        </Toolbar>
       </Container>
     </AppBar>
   );

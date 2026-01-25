@@ -31,27 +31,24 @@ export default function ToDoList() {
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem("todos")) || [];
     dispatch({ type: "loaded", payload: storageTodos });
-  }, [dispatch]);
+  }, []);
 
-  const completedTodos = useMemo(() => {
-    return todos.filter((t) => t.isDone);
-  }, [todos]);
+  const completedTodos = useMemo(() => todos.filter((t) => t.isDone), [todos]);
 
-  const notCompletedTodos = useMemo(() => {
-    return todos.filter((t) => !t.isDone);
-  }, [todos]);
+  const notCompletedTodos = useMemo(
+    () => todos.filter((t) => !t.isDone),
+    [todos],
+  );
 
   let todosToBeRender = todos;
-  if (displayedTodos === "done") {
-    todosToBeRender = completedTodos;
-  } else if (displayedTodos === "undone") {
-    todosToBeRender = notCompletedTodos;
-  }
+  if (displayedTodos === "done") todosToBeRender = completedTodos;
+  else if (displayedTodos === "undone") todosToBeRender = notCompletedTodos;
 
   function addTask() {
+    if (!newTaskInput.trim()) return;
     dispatch({ type: "added", payload: { title: newTaskInput } });
     setnewTaskInput("");
-    showSnackBar("New task Has Been Added");
+    showSnackBar("New task has been added");
   }
 
   function handelDoneCheck(todoID) {
@@ -60,38 +57,47 @@ export default function ToDoList() {
 
   function handleDeleteTask(selectedTask) {
     dispatch({ type: "deleted", payload: selectedTask });
-    showSnackBar("Task Has Been Deleted");
+    showSnackBar("Task has been deleted");
   }
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 8, mb: 8 }}>
+    <Container
+      maxWidth="sm"
+      sx={{
+        mt: { xs: 4, md: 8 },
+        mb: { xs: 4, md: 8 },
+        px: { xs: 1.5, sm: 2 },
+      }}
+    >
       <Card
         sx={{
-          borderRadius: "24px",
+          borderRadius: { xs: "16px", sm: "24px" },
           boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
-          overflow: "visible",
           border: "1px solid rgba(0,0,0,0.05)",
         }}
       >
-        <CardContent sx={{ p: 4 }}>
-          {/* Header Section */}
+        <CardContent sx={{ p: { xs: 2, sm: 4 } }}>
+          {/* Header */}
           <Stack spacing={2} sx={{ mb: 4 }}>
             <Typography
               variant="h4"
               sx={{
                 fontWeight: 800,
                 color: "#1e293b",
-                textAlign: "left",
-                fontFamily: "'Inter', sans-serif",
+                fontSize: {
+                  xs: "1.5rem",
+                  sm: "2rem",
+                },
               }}
             >
               My Tasks
             </Typography>
 
-            {/* Input Section */}
+            {/* Input */}
             <Box
               sx={{
                 display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
                 gap: 1,
                 background: "#f8fafc",
                 p: 1,
@@ -112,14 +118,16 @@ export default function ToDoList() {
 
           <Divider sx={{ mb: 3 }} />
 
-          {/* Filters Section */}
-          <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
+          {/* Filters */}
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
             <ToggleButtonGroup
-              className="todo-filters"
               value={displayedTodos}
               exclusive
               onChange={changeDisplayedTodos}
               size="small"
+              sx={{
+                flexWrap: "wrap",
+              }}
             >
               <ToggleButton value="All">All</ToggleButton>
               <ToggleButton value="undone">Pending</ToggleButton>
@@ -127,15 +135,14 @@ export default function ToDoList() {
             </ToggleButtonGroup>
           </Box>
 
-          {/* Tasks List */}
-          <Box sx={{ minHeight: "300px" }}>
+          {/* Tasks */}
+          <Box sx={{ minHeight: { xs: "200px", sm: "300px" } }}>
             {todos.length > 0 ? (
               todosToBeRender
                 .slice()
                 .reverse()
                 .map((t) => (
                   <ToDo
-                    dispatch={dispatch}
                     key={t.id}
                     todo={t}
                     checkFunction={handelDoneCheck}
