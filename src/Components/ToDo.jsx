@@ -97,7 +97,7 @@ import { SnackBarContext } from "../Contexts/SnackBarContext";
                       id="standard-basic"
                       label="editing text"
                       variant="standard"
-                      style={{ width: "230%" }}
+                      fullWidth
                       value={editTitle}
                       onChange={handelEditClick}
                     />

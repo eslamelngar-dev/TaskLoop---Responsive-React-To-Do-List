@@ -13,24 +13,23 @@ export default function ActionButtons({
   setIsEditing,
   handelSaveClick,
 }) {
-  
   function handleEditClick() {
-    isEditing ? setIsEditing(false) : setIsEditing(true);
+    setIsEditing(true);
   }
 
   return (
     <Grid item xs={4} display="flex" justifyContent="flex-end" gap={1}>
-      {!isEditing &&(
+      {!isEditing && (
         <IconButton
-        sx={{
-          backgroundColor: todo.isDone ? "grey" : "#21c921",
-          color: "white",
-        }}
-        className={`IconButtons add-btn ${todo.isDone ? "done" : ""}`}
-        onClick={handelDoneClick}
-      >
-        <CheckIcon />
-      </IconButton>
+          sx={{
+            backgroundColor: todo.isDone ? "grey" : "#21c921",
+            color: "white",
+          }}
+          className={`IconButtons add-btn ${todo.isDone ? "done" : ""}`}
+          onClick={handelDoneClick}
+        >
+          <CheckIcon />
+        </IconButton>
       )}
 
       <IconButton

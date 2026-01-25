@@ -147,6 +147,7 @@ export default function ToDoList() {
                     todo={t}
                     checkFunction={handelDoneCheck}
                     deleteFunction={handleDeleteTask}
+                    dispatch={dispatch}
                   />
                 ))
             ) : (

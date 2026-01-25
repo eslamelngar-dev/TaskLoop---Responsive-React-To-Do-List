@@ -33,10 +33,12 @@ export default function TodosReducer(currentTodos, action) {
     }
 
     case "edited": {
+      console.log("hi")
       const todoId = action.payload.id
       const editTitle = action.payload.editTitle
+      if (!editTitle.trim()) return currentTodos;
       const updatedTodos = currentTodos.map((t) =>
-        t.id == todoId ? { ...t, title: editTitle } : t
+        t.id === todoId ? { ...t, title: editTitle.trim() } : t
       )
       localStorage.setItem("todos", JSON.stringify(updatedTodos))
       return updatedTodos
