@@ -2,7 +2,6 @@ import { NavLink, Link } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import {
   AppBar,
-  Toolbar,
   Typography,
   Container,
   Button,
@@ -45,7 +44,7 @@ export default function NavBar() {
                 fontSize:{
                   xs:"1rem",
                   sm:"2rem",
-                  md:"3rem"
+                  md:"2.2rem"
                 }
               }}
             >
