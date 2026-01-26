@@ -32,13 +32,7 @@ export default function About() {
         "Access your tasks from any device. Our platform is fully responsive and mobile-friendly.",
       icon: <DevicesIcon sx={{ fontSize: 40, color: "#6366f1" }} />,
     },
-    {
-      title: "Secure Storage",
-      description:
-        "Your data is stored locally on your device, ensuring maximum privacy and instant access.",
-      icon: <SecurityIcon sx={{ fontSize: 40, color: "#6366f1" }} />,
-    },
-  ];
+      ];
 
   return (
     <Container maxWidth="lg" sx={{ py: 10 }}>
@@ -46,8 +40,7 @@ export default function About() {
       <Box sx={{ textAlign: "center", mb: 8 }}>
         <Typography
           variant="h3"
-          className="home-title"
-          sx={{ fontWeight: 800, mb: 2 }}
+          sx={{ fontWeight: 800, mb: 2, color: "white" }}
         >
           About TaskLoop
         </Typography>
@@ -63,34 +56,52 @@ export default function About() {
       </Box>
 
       {/* Features Grid */}
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justifyContent="center">
         {features.map((feature, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            key={index}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <Card
               sx={{
-                height: "100%",
-                borderRadius: "20px",
+                width: "100%",
+                maxWidth: 320,
+                borderRadius: 3,
                 boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
                 border: "1px solid rgba(0,0,0,0.05)",
                 transition: "transform 0.3s ease",
                 "&:hover": { transform: "translateY(-10px)" },
               }}
             >
-              <CardContent sx={{ textAlign: "center", p: 4 }}>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  minHeight: 260,
+                  p: 4,
+                }}
+              >
                 <Avatar
                   sx={{
                     width: 80,
                     height: 80,
-                    mx: "auto",
                     mb: 3,
                     bgcolor: "rgba(99, 102, 241, 0.08)",
                   }}
                 >
                   {feature.icon}
                 </Avatar>
+
                 <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
                   {feature.title}
                 </Typography>
+
                 <Typography variant="body2" color="textSecondary">
                   {feature.description}
                 </Typography>
